@@ -14,8 +14,15 @@ https://www.udemy.com/course/best-aws-certified-solutions-architect-associate/le
 | ---- | ----------------- | ---- | ---- | ---- | ---- |
 |      | **IAM & AWS CLI** |      |      |      |      |
 | 1    | [IAM]()           |      |      |      |      |
-| 2    |                   |      |      |      |      |
-| 3    |                   |      |      |      |      |
+| 2    | [AWS CLI]()       |      |      |      |      |
+|      | **EC2**           |      |      |      |      |
+| 1    | [EC2]()           |      |      |      |      |
+| 2    | [AWS CLI]()       |      |      |      |      |
+|      |                   |      |      |      |      |
+|      |                   |      |      |      |      |
+|      |                   |      |      |      |      |
+
+-------
 
 # IAM
 
@@ -130,3 +137,91 @@ https://www.udemy.com/course/best-aws-certified-solutions-architect-associate/le
 - create and use roles for giving permissions to AWS services
 - use Access Keys for Programmatic Access
 - Audit permissions of your account using IAM credentials Report & IAM access Advisor
+
+
+
+-----
+
+# EC2
+
+= Elastic Compute Cloud = infrastructure as a Service
+
+= Identity and Access Management
+
+= **Global** service: you can use this console(IAM) in every region.
+
+- Capability
+  - Renting virtual machines (EC2)
+  - Storing data on virtual drives (EBS)
+  - distributing load across machines (ELB)
+  - Scaling the services using an auto-scaling group (ASG)
+
+# EC2 sizing & Configuration Options
+
+- operating system: Linux, windows or mac OS
+- how much compute power & cores (CPU)
+- how much random-access memory (RAM)
+- how much storage space:
+  - Network-attached (EBS & EFS)
+  - Hardware (EC2 Instance Store)
+- Network Card: Speed of the card, Public IP address
+- Firewall rules: security group
+- Bootstrap Script: EC2 User Data
+
+# EC2 User Data
+
+- it is possible to bootstrap our instances using an EC2 User data script
+- **bootstrapping** means launching commands when a machine starts
+- that script is **only run once** at the instance first start
+- EC2 user data is used to automate boot tasks such as:
+  - installing updates
+  - installing software
+  - downloading common files from the internet
+  - anything you can think of
+- User Data script runs with the root user
+
+## EC2 Instance Types - Overview
+
+Example: m5.2xlarge
+
+- m: instance class
+- 5: generation (AWS improves them over time)
+- 2xlarge: size within the instance class
+
+## EC2 Instance Types - General Purpose
+
+- Greate for a diversity of workloads such as web servers or code repositiories
+- Balance between:
+  - compute
+  - memory
+  - networking
+
+## EC2 Instance Types - **Compute** Optimized
+
+- great for compute-intensive tasks that require **high performance processors**:
+  - batch processing workloads
+  - media transcoding
+  - High performance web servers
+  - high performance computing
+  - scientific modeling & machine learning
+  - dedicated gaming servers
+
+## EC2 Instance Types - Memory Optimized
+
+- fast performance for workloads that process l**arge data sets in memory**:
+- Use cases:
+  - high performance, relational/non-relational databases
+  - distributed web scale cache stores
+  - In-memory databases optimized for BI (Business Intelligence)
+  - applications performing real-time processing of big unstructured data
+
+## EC2 Instance Types - Storage Optimized
+
+- Greate for storage-intensive tasks that require high, sequential read and write access to large data sets on local storage
+- use cases:
+  - high frequency online transaction processing(OLTP) systems
+  - relational & NoSQL databases
+  - Cache for in-memory databases (eg. Redid)
+  - data warehousing applications
+  - distributed filed systems
+
