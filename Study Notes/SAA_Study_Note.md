@@ -81,7 +81,7 @@ https://www.udemy.com/course/best-aws-certified-solutions-architect-associate/le
 - very recommended to use in AWS
 -  Users have access to your account and can possibly change configurations or delete resources in your AWS account.
 - Protect Root Accounts and IAM users.
-- **Benefit** : if a password is stolen or hacked, the account is not compromised.
+- **Benefit** : if a password is stolen or hacked, the account is not compromised.(침해 당하지 않는다)
   - since security device you own should be needed to login
 - **Options**: 
   - virtual MFA device: support for multiple tokens(accounts') on a single device.
@@ -365,11 +365,38 @@ Example: m5.2xlarge
 ## EC2 Spot Instance Requests
 
 - Can get a discount of up to 90% compared to On-demand 
+
 - Define max spot price and get the instance while current spot price < max 
-  - The hourly spot price varies based on offer and capacity 
-  - If the current spot price > your max price you can choose to stop or terminate your instance with a 2 minutes grace period. 
-- Other strategy: Spot Block 
-  - “block” spot instance during a specified time frame (1 to 6 hours) without interruptions 
-  - In rare situations, the instance may be reclaimed 
+
+  - The hourly spot price varies based on offer and capacity(제공과 용량)
+  - If the current spot price > your max price you can choose to **stop**(멈춤) or **terminate**(종료) your instance with a 2 minutes grace period. 
+
+- Other strategy: **Spot Block** 
+
+  - “block” spot instance during a specified time frame (available between 1 to 6 hours) without interruptions 
+  - In rare situations, the instance may be reclaimed(회수) => but again, rarely!
+
 - Used for batch jobs, data analysis, or workloads that are resilient to failures. 
+
 - Not great for critical jobs or databases
+
+- <u>How to terminate Spot Instances?</u>
+
+  1. Cancel Spot requests (when spot requests are active, disabled or closed)
+     - cancelling a spot request does not terminate instances
+
+  2. Terminate the associated spot instances
+
+## Spot Fleets
+
+- Spot Fleets(무리) = set of Spot Instances + (optional) On-Demand Instances 
+- The Spot Fleet will try to meet the target capacity(목표 용량) with price constraints(가격 제한) 
+  - Define possible launch pools: instance type (m5.large), OS, Availability Zone 
+  - Can have multiple launch pools, so that the fleet can choose 
+  - Spot Fleet stops launching instances when reaching capacity or max cost 
+- Strategies to allocate Spot Instances: 
+  - **lowestPrice**: from the pool with the lowest price (cost optimization, short workload)
+  - **diversified**(다양한): distributed across all pools - when one pool is gone, the other pool will be active (great for availability, long workloads)
+  - **capacityOptimized**(용량 최적화): pool with the optimal capacity for the number of instances
+  - **priceCapacityOptimized** (recommended): pools with highest capacity available, then select the pool with the lowest price (best choice for most workloads) 
+- <u>Spot Fleets allow us to automatically request Spot Instances with the lowest price</u>
