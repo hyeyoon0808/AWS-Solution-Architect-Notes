@@ -745,15 +745,15 @@ Example: m5.2xlarge
 ## EFS – Performance & Storage Classes
 
 - EFS Scale 
-  - 1000s of concurrent NFS clients, 10 GB+ /s throughput 
+  - 1000s of concurrent NFS(Network File System) clients, 10 GB+ /s throughput 
   - Grow to Petabyte-scale network file system, automatically 
 - Performance Mode (set at EFS creation time) 
   - General Purpose (default) – latency-sensitive use cases (web server, CMS, etc…) 
   - Max I/O – higher latency, throughput, highly parallel (big data, media processing) 
 - Throughput Mode 
-  - Bursting – 1 TB = 50MiB/s + burst of up to 100MiB/s 
-  - Provisioned – set your throughput regardless of storage size, ex: 1 GiB/s for 1 TB storage 
-  - Elastic – automatically scales throughput up or down based on your workloads 
+  - **Bursting** – 1 TB = 50MiB/s + burst of up to 100MiB/s 
+  - **Provisioned** – set your throughput regardless of storage size, ex: 1 GiB/s for 1 TB storage 
+  - **Elastic** – automatically scales throughput up or down based on your workloads 
     - Up to 3GiB/s for reads and 1GiB/s for writes 
     - Used for unpredictable workloads
 
@@ -761,32 +761,32 @@ Example: m5.2xlarge
 
 - Storage Tiers (lifecycle management feature – move file after N days) 
   - Standard: for frequently accessed files 
-  - Infrequent access (EFS-IA): cost to retrieve files, lower price to store. 
+  - Infrequent access (자주 액세스 하지 않는)(EFS-IA): cost to retrieve(검색) files, lower price to store files. 
   - Archive: rarely accessed data (few times each year), 50% cheaper 
   - Implement lifecycle policies to move files between storage tiers 
 - Availability and durability 
-  - Standard: Multi-AZ, great for prod 
+  - Standard: Multi-AZ, great for product
   - One Zone: One AZ, great for dev, backup enabled by default, compatible with IA (EFS One Zone-IA) 
 - Over 90% in cost savings
 
 ## EBS vs EFS – Elastic Block Storage
 
 - EBS volumes… 
-  - one instance (except multi-attach io1/io2) 
-  - are locked at the Availability Zone (AZ) level 
+  - **one instance** (except multi-attach io1/io2-but very specific) 
+  - are **locked** at the **Availability Zone (AZ) level** 
   - gp2: IO increases if the disk size increases 
   - gp3 & io1: can increase IO independently 
 - To migrate an EBS volume across AZ 
-  - Take a snapshot 
+  - **Take a snapshot** 
   - Restore the snapshot to another AZ 
-  - EBS backups use IO and you shouldn’t run them while your application is handling a lot of traffic 
-- Root EBS Volumes of instances get terminated by default if the EC2 instance gets terminated. (you can disable that)
+  - EBS backups **use IO** and you **shouldn’t run them** while your application is handling a lot of traffic 
+- Root EBS Volumes of instances **get terminated by default** if the EC2 instance gets terminated. (you can disable that)
 
 ## EBS vs EFS – Elastic File System
 
-- Mounting 100s of instances across AZ 
-- EFS share website files (WordPress) 
-- Only for Linux Instances (POSIX) 
+- Mounting 100s of instances **across AZ** 
+- EFS **share website files** (WordPress) 
+- **Only for Linux** Instances (POSIX) 
 - EFS has a higher price point than EBS 
 - Can leverage Storage Tiers for cost savings 
 - Remember: EFS vs EBS vs Instance Store 
